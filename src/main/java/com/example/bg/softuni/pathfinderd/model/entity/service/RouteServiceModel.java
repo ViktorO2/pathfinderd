@@ -1,14 +1,14 @@
-package com.example.bg.softuni.pathfinderd.model.entity;
+package com.example.bg.softuni.pathfinderd.model.entity.service;
 
+import com.example.bg.softuni.pathfinderd.model.entity.Category;
+import com.example.bg.softuni.pathfinderd.model.entity.Picture;
+import com.example.bg.softuni.pathfinderd.model.entity.User;
 import com.example.bg.softuni.pathfinderd.model.entity.enums.LevelEnum;
-import jakarta.persistence.*;
 
 import java.util.Set;
 
-@Entity
-@Table(name = "routes")
-public class Route extends BaseEntity {
-
+public class RouteServiceModel {
+    private Long id;
     private String gpxCoordinates;
     private String description;
     private LevelEnum level;
@@ -18,65 +18,25 @@ public class Route extends BaseEntity {
     private Set<Picture> pictures;
     private Set<Category> categories;
 
-
-    @OneToMany(mappedBy = "route",fetch = FetchType.EAGER)
-    public Set<Picture> getPictures() {
-        return pictures;
+    public RouteServiceModel() {
     }
 
-    public void setPictures(Set<Picture> pictures) {
-        this.pictures = pictures;
+    public Long getId() {
+        return id;
     }
 
-    public Route() {
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Column(columnDefinition = "LONGTEXT")
     public String getGpxCoordinates() {
         return gpxCoordinates;
     }
 
-    public void setGpxCoordinates(String gpxCoordinate) {
-        this.gpxCoordinates = gpxCoordinate;
+    public void setGpxCoordinates(String gpxCoordinates) {
+        this.gpxCoordinates = gpxCoordinates;
     }
 
-    @Enumerated(EnumType.STRING)
-    public LevelEnum getLevel() {
-        return level;
-    }
-
-    public void setLevel(LevelEnum level) {
-        this.level = level;
-    }
-
-    @Column(unique = true)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @ManyToOne
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    @Column
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -85,7 +45,46 @@ public class Route extends BaseEntity {
         this.description = description;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    public LevelEnum getLevel() {
+        return level;
+    }
+
+    public void setLevel(LevelEnum level) {
+        this.level = level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
     public Set<Category> getCategories() {
         return categories;
     }

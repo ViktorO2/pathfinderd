@@ -1,14 +1,13 @@
-package com.example.bg.softuni.pathfinderd.model.entity;
+package com.example.bg.softuni.pathfinderd.model.entity.service;
 
+import com.example.bg.softuni.pathfinderd.model.entity.Role;
 import com.example.bg.softuni.pathfinderd.model.entity.enums.LevelEnum;
-import jakarta.persistence.*;
 
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+public class UserServiceModel {
 
+    private Long id;
     private String fullName;
     private String username;
     private String password;
@@ -17,10 +16,17 @@ public class User extends BaseEntity {
     private LevelEnum level;
     private Set<Role> roles;
 
-    public User() {
+    public UserServiceModel() {
     }
 
-    @Column(nullable = false)
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -29,7 +35,14 @@ public class User extends BaseEntity {
         this.fullName = fullName;
     }
 
-    @Column(nullable = false)
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -38,7 +51,6 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    @Column()
     public String getEmail() {
         return email;
     }
@@ -47,24 +59,6 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    @Enumerated(EnumType.STRING)
-    public LevelEnum getLevel() {
-        return level;
-    }
-
-    public void setLevel(LevelEnum level) {
-        this.level = level;
-    }
-    @ManyToMany(fetch = FetchType.EAGER)
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Column(name = "age")
     public Integer getAge() {
         return age;
     }
@@ -72,12 +66,20 @@ public class User extends BaseEntity {
     public void setAge(Integer age) {
         this.age = age;
     }
-    @Column(nullable = false,unique = true)
-    public String getUsername() {
-        return username;
+
+    public LevelEnum getLevel() {
+        return level;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLevel(LevelEnum level) {
+        this.level = level;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
