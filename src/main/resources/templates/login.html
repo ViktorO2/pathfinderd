@@ -21,6 +21,7 @@
                     <div class="col-auto">
                         <input type="text"
                                th:field="*{username}"
+                               th:errorclass="'is-invalid bg-danger'"
                                name="username"
                                required minlength="4" maxlength="20"
                                id="inputUsername"
@@ -40,6 +41,9 @@
                                id="inputPassword" class="form-control"
                                aria-describedby="passwordHelpInline">
                     </div>
+                    <small class="invalid-feedback">
+                        <span class="bg-danger">Username is not correct</span>
+                    </small>
                 </div>
                 <div class="d-flex justify-content-center mt-2">
                     <button class="btn btn-primary btn-block w-50" type="submit">Login</button>

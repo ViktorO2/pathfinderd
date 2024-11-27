@@ -1,33 +1,23 @@
-package com.example.bg.softuni.pathfinderd.model.entity.service;
+package com.example.bg.softuni.pathfinderd.model.entity.view;
 
 import com.example.bg.softuni.pathfinderd.model.entity.Category;
 import com.example.bg.softuni.pathfinderd.model.entity.Picture;
 import com.example.bg.softuni.pathfinderd.model.entity.User;
-import com.example.bg.softuni.pathfinderd.model.entity.enums.CategoryNameEnum;
 import com.example.bg.softuni.pathfinderd.model.entity.enums.LevelEnum;
 
 import java.util.Set;
 
-public class RouteServiceModel {
-    private Long id;
+public class RouteDetailsViewModel {
+
     private String gpxCoordinates;
     private String description;
     private LevelEnum level;
     private String name;
-    private User author;
     private String videoUrl;
     private Set<Picture> pictures;
-    private Set<CategoryNameEnum> categories;
 
-    public RouteServiceModel() {
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public RouteDetailsViewModel() {
     }
 
     public String getGpxCoordinates() {
@@ -62,14 +52,6 @@ public class RouteServiceModel {
         this.name = name;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
     public String getVideoUrl() {
         return videoUrl;
     }
@@ -84,13 +66,5 @@ public class RouteServiceModel {
 
     public void setPictures(Set<Picture> pictures) {
         this.pictures = pictures;
-    }
-
-    public Set<CategoryNameEnum> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<CategoryNameEnum> categories) {
-        this.categories = categories;
     }
 }

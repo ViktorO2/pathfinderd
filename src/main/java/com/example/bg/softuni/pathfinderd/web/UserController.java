@@ -31,8 +31,9 @@ public class UserController {
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
     }
+
     @ModelAttribute
-    public UserLoginBindingModel userLoginBindingModel(){
+    public UserLoginBindingModel userLoginBindingModel() {
         return new UserLoginBindingModel();
     }
 
@@ -56,8 +57,8 @@ public class UserController {
 
             return "redirect:register";
         }
-        boolean isNameExists=userService.isNameExists(userRegisterBindingModel.getUsername());
-        if (isNameExists){
+        boolean isNameExists = userService.isNameExists(userRegisterBindingModel.getUsername());
+        if (isNameExists) {
             //TODO redirect with message
         }
 
@@ -66,48 +67,51 @@ public class UserController {
 
         return "redirect:login";
     }
+
     @GetMapping("/login")
     public String login(Model model) {
-     model.addAttribute("isExists",true);
+        model.addAttribute("isExists", true);
         return "login";
 
     }
+
     @PostMapping("/login")
-    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,BindingResult bindingResult,RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes
-                    .addFlashAttribute("userLoginBindingModel",userLoginBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",bindingResult);
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 
             return "redirect:login";
         }
-        UserServiceModel user=userService
-                .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),userLoginBindingModel.getPassword());
+        UserServiceModel user = userService
+                .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword());
 
-        if(user==null){
+        if (user == null) {
             redirectAttributes
-                    .addFlashAttribute("isExists",false)
-                    .addFlashAttribute("userLoginBindingModel",userLoginBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",bindingResult);
+                    .addFlashAttribute("isExists", false)
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 
             return "redirect:login";
         }
-        userService.loginUser(user.getId(),user.getUsername());
+        userService.loginUser(user.getId(), user.getUsername());
 
 
         return "redirect:/";
 
     }
+
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         userService.logout();
         return "redirect:/";
     }
 
     @GetMapping("/profile/{id}")
-    private String profile(@PathVariable Long id,Model model){
-    model.addAttribute("user",modelMapper
-            .map(userService.findById(id), UserViewModel.class));
+    private String profile(@PathVariable Long id, Model model) {
+        model.addAttribute("user", modelMapper
+                .map(userService.findById(id), UserViewModel.class));
         return "profile";
 
     }
